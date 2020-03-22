@@ -1,28 +1,42 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sailor/sailor.dart';
-import 'package:sauna/views/sauna_basic_args.dart';
+import 'package:sauna/views/sauna_view_args.dart';
 import 'package:sauna/views/sauna_home_page.dart';
 import 'package:sauna/routes.dart';
 import 'package:sauna/services/login_service.dart';
+import 'package:sauna/services/sauna_service_args.dart';
+import 'package:sauna/services/slot_service.dart';
 
 class SaunaApp extends StatefulWidget {
+  final SaunaViewArgs vArgs;
+  final SaunaServiceArgs sArgs;
 
-  final SaunaBasicArgs args;
-  SaunaApp({@required this.args});
+  SaunaApp({@required this.vArgs, @required this.sArgs});
 
   @override
   State<StatefulWidget> createState() {
-    final loginService = SaunaLoginService(args: args);
-    return _SaunaAppState(loginService: loginService);
-  }
 
+    final loginService = SaunaLoginService(args: sArgs);
+    final slotService = SlotService(args: sArgs);
+
+    return _SaunaAppState(
+      loginService: loginService,
+      slotService: slotService,
+    );
+
+  }
 }
 
 class _SaunaAppState extends State<SaunaApp> {
 
   final SaunaLoginService loginService;
-  _SaunaAppState({@required this.loginService});
+  final SlotService slotService;
+
+  _SaunaAppState({
+    @required this.loginService,
+    @required this.slotService,
+  });
 
   @override
   void initState() {
@@ -37,6 +51,9 @@ class _SaunaAppState extends State<SaunaApp> {
         Provider<SaunaLoginService>(
           create: (_) => loginService,
         ),
+        Provider<SlotService>(
+          create: (_) => slotService,
+        ),
       ],
       child: MaterialApp(
         title: 'Hakolahdentie 2, Sauna',
@@ -44,7 +61,7 @@ class _SaunaAppState extends State<SaunaApp> {
           primarySwatch: Colors.blue,
         ),
         home: SaunaHomePage(
-          args: widget.args,
+          args: widget.vArgs,
         ),
         onGenerateRoute: Routes.sailor.generator(),
         navigatorKey: Routes.sailor.navigatorKey,

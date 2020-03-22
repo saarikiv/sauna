@@ -2,7 +2,7 @@ import 'package:flutter/animation.dart';
 import 'package:sailor/sailor.dart';
 import 'package:sauna/views/sauna_home_page.dart';
 import 'package:sauna/views/sauna_login_page.dart';
-import 'package:sauna/views/sauna_slot_view.dart';
+import 'package:sauna/views/sauna_slot_page.dart';
 
 class Routes {
   static final sailor = Sailor();
@@ -38,7 +38,7 @@ class Routes {
           defaultTransitionCurve: Curves.decelerate,
           defaultTransitionDuration: Duration(milliseconds: 300),
           builder: (context, args, params) {
-            return SaunaSlotView(args: args,);
+            return SaunaSlotPage(args: args,);
           }),
     ]);
   }

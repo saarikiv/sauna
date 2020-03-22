@@ -10,12 +10,6 @@ class Slot {
 
   Slot();
 
-  factory Slot.p(BuildContext context){
-    final slot = Slot();
-    slot._key = 'undefined';
-    return slot;
-  }
-
   Slot.fromDynamic(String key, dynamic data){
     _key = key;
     blocked = data['blocked'];

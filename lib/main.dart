@@ -5,7 +5,8 @@ import 'package:firebase_analytics/firebase_analytics.dart';
 import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'sauna_app.dart';
-import 'views/sauna_basic_args.dart';
+import 'views/sauna_view_args.dart';
+import 'services/sauna_service_args.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -26,16 +27,23 @@ Future<void> main() async {
   );
   final FirebaseAnalytics analytics = FirebaseAnalytics();
   final FirebaseAnalyticsObserver observer =
-  FirebaseAnalyticsObserver(analytics: analytics);
+      FirebaseAnalyticsObserver(analytics: analytics);
 
-
-
-  final args = SaunaBasicArgs(
+  final vArgs = SaunaViewArgs(
     title: 'Hakolahdentie 2 sauna',
     analytics: analytics,
     observer: observer,
     firebaseApp: firebaseApp,
   );
-  runApp(SaunaApp(args: args));
-}
 
+  final sArgs = SaunaServiceArgs(
+    analytics: analytics,
+    observer: observer,
+    firebaseApp: firebaseApp,
+  );
+
+  runApp(SaunaApp(
+    vArgs: vArgs,
+    sArgs: sArgs,
+  ));
+}

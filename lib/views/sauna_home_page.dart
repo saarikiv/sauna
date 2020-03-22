@@ -1,18 +1,27 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:sailor/sailor.dart';
-import 'sauna_basic_args.dart';
-import '../routes.dart';
+import 'sauna_view_args.dart';
+import 'package:sauna/routes.dart';
+import 'package:sauna/services/login_service.dart';
 
 class SaunaHomePage extends StatefulWidget {
   SaunaHomePage({Key key, @required this.args}) : super(key: key);
-  final SaunaBasicArgs args;
+  final SaunaViewArgs args;
 
   @override
   _SaunaHomePageState createState() => _SaunaHomePageState();
 }
 
 class _SaunaHomePageState extends State<SaunaHomePage> {
+  SaunaLoginService loginService;
+
+  @override
+  void didChangeDependencies() {
+    loginService = Provider.of<SaunaLoginService>(context);
+    super.didChangeDependencies();
+  }
+
   void _loginPressed() {
     widget.args.analytics.logEvent(
       name: 'loginPressed',
@@ -46,7 +55,7 @@ class _SaunaHomePageState extends State<SaunaHomePage> {
       ],
       transitionDuration: Duration(milliseconds: 500),
       transitionCurve: Curves.decelerate,
-      navigationType: NavigationType.pushReplace,
+      navigationType: NavigationType.push,
       args: widget.args,
     );
   }
@@ -62,22 +71,28 @@ class _SaunaHomePageState extends State<SaunaHomePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             FlatButton(
+              color: Colors.black,
+              disabledColor: Colors.grey,
               child: Text(
                 'login',
                 style: TextStyle(
+                  color: Colors.white,
                   fontSize: 20,
                 ),
               ),
-              onPressed: _loginPressed,
+              onPressed: loginService.loginComplete()? null : _loginPressed,
             ),
             FlatButton(
+              color: Colors.black,
+              disabledColor: Colors.grey,
               child: Text(
                 'slots',
                 style: TextStyle(
+                  color: Colors.white,
                   fontSize: 20,
                 ),
               ),
-              onPressed: _slotsPressed,
+              onPressed: loginService.loginComplete() ? _slotsPressed : null,
             ),
           ],
         ),

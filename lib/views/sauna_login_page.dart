@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:sauna/views/sauna_basic_args.dart';
+import 'package:sauna/views/sauna_view_args.dart';
 import 'package:sauna/routes.dart';
 import 'package:sauna/services/login_service.dart';
 
 class SaunaLoginPage extends StatefulWidget {
   SaunaLoginPage({Key key, @required this.args}) : super(key: key);
-  final SaunaBasicArgs args;
+  final SaunaViewArgs args;
 
   @override
   _SaunaLoginPageState createState() => _SaunaLoginPageState();
@@ -15,9 +15,15 @@ class SaunaLoginPage extends StatefulWidget {
 class _SaunaLoginPageState extends State<SaunaLoginPage> {
   SaunaLoginService _loginService;
 
+  @override
+  void didChangeDependencies() {
+    _loginService = Provider.of<SaunaLoginService>(context);
+    super.didChangeDependencies();
+  }
+
   void _doLogin() async {
     bool loginSuccess = await _loginService?.signInWithEmailAndPassword();
-    if(loginSuccess) _navigateBack();
+    if (loginSuccess) _navigateBack();
   }
 
   void _navigateBack() {
@@ -26,7 +32,6 @@ class _SaunaLoginPageState extends State<SaunaLoginPage> {
 
   @override
   Widget build(BuildContext context) {
-    _loginService = Provider.of<SaunaLoginService>(context);
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.args.title),

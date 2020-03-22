@@ -5,13 +5,13 @@ import 'package:firebase_analytics/observer.dart';
 import 'package:firebase_core/firebase_core.dart';
 
 
-class SaunaBasicArgs extends BaseArguments {
+class SaunaViewArgs extends BaseArguments {
   final String title;
   final FirebaseAnalytics analytics;
   final FirebaseAnalyticsObserver observer;
   final FirebaseApp firebaseApp;
 
-  SaunaBasicArgs({
+  SaunaViewArgs({
     @required this.title,
     @required this.analytics,
     @required this.observer,

@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
-import '../views/sauna_basic_args.dart';
+import 'package:sauna/services/sauna_service_args.dart';
+import 'sauna_service_args.dart';
 
 class SaunaLoginService {
-  final SaunaBasicArgs args;
+  final SaunaServiceArgs args;
 
   SaunaLoginService({@required this.args});
 
   final FirebaseAuth _auth = FirebaseAuth.instance;
   FirebaseUser user;
   bool _loginComplete = false;
+
+  bool loginComplete() => _loginComplete;
 
   Future<bool> signInWithEmailAndPassword() async {
     user = (await _auth.signInWithEmailAndPassword(
