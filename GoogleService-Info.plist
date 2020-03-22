@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>883401530976-7v7futtfnt4hs8chgg58gppje6qcmi2m.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.883401530976-7v7futtfnt4hs8chgg58gppje6qcmi2m</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>883401530976-9so6b8v8g5o0rpck3hbgq1poja9h1g1l.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBLXA9alyYDKVxuVx9zBXuCWliJncjf4nE</string>
+	<key>GCM_SENDER_ID</key>
+	<string>883401530976</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.hakolahdentie2.sauna</string>
+	<key>PROJECT_ID</key>
+	<string>hakolahdentie-2</string>
+	<key>STORAGE_BUCKET</key>
+	<string>hakolahdentie-2.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:883401530976:ios:1f33c56f2d109aec7bad05</string>
+	<key>DATABASE_URL</key>
+	<string>https://hakolahdentie-2.firebaseio.com</string>
+</dict>
+</plist>
