@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 class Slot {
@@ -10,7 +11,7 @@ class Slot {
 
   Slot();
 
-  Slot.fromDynamic(String key, dynamic data){
+  Slot.fromDynamic(String key, dynamic data) {
     _key = key;
     blocked = data['blocked'];
     start = data['start'];
@@ -19,17 +20,60 @@ class Slot {
     day = data['day'];
   }
 
-  Widget present(BuildContext context){
-    return Container(
+  String timeStr(int timeInt) {
+    final hours = timeInt ~/ 3600000;
+    final minutes = '00';
+    final time = hours.toString() + ':' + minutes.toString();
+    return time;
+  }
+
+  String dayOfTheWeek(int day) {
+    final days = [
+      'Sunnuntai',
+      'Maanantai',
+      'Tiistai',
+      'Keskiviikko',
+      'Torstai',
+      'Perjantai',
+      'Lauantai',
+    ];
+    return days[day];
+  }
+
+  Widget present(BuildContext context) {
+    return Card(
+      color: reserver.length > 0? Colors.blue : Colors.lightGreen,
+      margin: EdgeInsets.only(top: 10, bottom: 10),
       child: Row(
-        children: <Widget>[
-          Icon(
-            blocked? Icons.block : Icons.beenhere,
-            color: Colors.black,
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+        Container(
+          //width: 150,
+          padding: EdgeInsets.all(10),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(dayOfTheWeek(day)),
+              Text(timeStr(start) + ' - ' + timeStr(end)),
+            ],
           ),
-          Text(reserver),
-        ],
-      ),
+        ),
+        Expanded(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Text(reserver),
+            ],
+          ),
+        ),
+        Container(
+          padding: EdgeInsets.all(15),
+          child: Icon(
+            blocked ? Icons.block : Icons.check,
+            size: 30,
+          ),
+        ),
+      ]),
     );
   }
 }

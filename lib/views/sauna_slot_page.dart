@@ -54,20 +54,7 @@ class _SaunaSlotPageState extends State<SaunaSlotPage> {
                           shrinkWrap: true,
                           itemCount: snapshot.data.length,
                           itemBuilder: (BuildContext context, int index) {
-                            return Card(
-                              margin: EdgeInsets.only(top: 10, bottom: 10),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: <Widget>[
-                                  Text("Start: " +
-                                      snapshot.data[index].start.toString()),
-                                  Text("End: " +
-                                      snapshot.data[index].end.toString()),
-                                  Text("Reserver: " +
-                                      snapshot.data[index].reserver),
-                                ],
-                              ),
-                            );
+                              return snapshot.data[index].present(context);
                           });
                     }
                     return CircularProgressIndicator();
