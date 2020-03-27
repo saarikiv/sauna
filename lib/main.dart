@@ -13,16 +13,20 @@ Future<void> main() async {
 
   final FirebaseApp firebaseApp = await FirebaseApp.configure(
     name: 'hakolhdentie-2',
-    options: Platform.isIOS
+    options: /* prod Platform.isIOS
         ? const FirebaseOptions(
             googleAppID: '1:883401530976:ios:1f33c56f2d109aec7bad05',
             gcmSenderID: '883401530976',
             databaseURL: 'https://hakolahdentie-2.firebaseio.com',
           )
-        : const FirebaseOptions(
+        :  const FirebaseOptions(
             googleAppID: '1:883401530976:android:2aec5b0f822223c9',
             apiKey: 'AIzaSyDRIDY5SB_HU_gXenn358QQx0mbvbIOXGQ',
             databaseURL: 'https://hakolahdentie-2.firebaseio.com',
+          ),*/ const FirebaseOptions(
+            googleAppID: '1:207441746283:android:6b7bf134308665d232142e',
+            apiKey: 'AIzaSyC7axxfS1c-eFrEENQS0RzWyvXumpFg40M',
+            databaseURL: 'https://varaus-a0250.firebaseio.com',
           ),
   );
   final FirebaseAnalytics analytics = FirebaseAnalytics();

@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "883401530976",
+    "firebase_url": "https://hakolahdentie-2.firebaseio.com",
+    "project_id": "hakolahdentie-2",
+    "storage_bucket": "hakolahdentie-2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:883401530976:android:2aec5b0f822223c9",
+        "android_client_info": {
+          "package_name": "com.hakolahdentie2.sauna"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "883401530976-9so6b8v8g5o0rpck3hbgq1poja9h1g1l.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.hakolahdentie2.sauna",
+            "certificate_hash": "a2f0ae6c27b272d1011be54cd1df59ce9419952a"
+          }
+        },
+        {
+          "client_id": "883401530976-8cmurffg3ujn6ti2cgedie0ki40ic1fr.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDRIDY5SB_HU_gXenn358QQx0mbvbIOXGQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "883401530976-8cmurffg3ujn6ti2cgedie0ki40ic1fr.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "883401530976-7v7futtfnt4hs8chgg58gppje6qcmi2m.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.hakolahdentie2.sauna"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

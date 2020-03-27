@@ -28,12 +28,13 @@ class SlotService {
   }
 
   Future<List<Slot>> slotsFromDb() async {
-    FirebaseDatabase database = FirebaseDatabase(
+   /* FirebaseDatabase database = FirebaseDatabase(
       app: args.firebaseApp,
-    );
+    );*/
     DataSnapshot data =
         await FirebaseDatabase.instance.reference().child('slots').once();
     processQueryResults(data);
     return slotList;
   }
+
 }

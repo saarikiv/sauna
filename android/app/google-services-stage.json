@@ -16,15 +16,6 @@
       "oauth_client": [
         {
           "client_id": "207441746283-cbuuatg20gu38um0m8rl0orlqd52e8o4.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.hakolahdentie2.sauna",
-            "certificate_hash": "a2f0ae6c27b272d1011be54cd1df59ce9419952a"
-          }
-        },
-
-        {
-          "client_id": "207441746283-cbuuatg20gu38um0m8rl0orlqd52e8o4.apps.googleusercontent.com",
           "client_type": 3
         }
       ],

@@ -60,6 +60,25 @@ class _SaunaHomePageState extends State<SaunaHomePage> {
     );
   }
 
+  void _shopPressed() {
+    widget.args.analytics.logEvent(
+      name: 'shopPressed',
+      parameters: {
+        'app': 'sauna',
+      },
+    );
+    Routes.sailor.navigate(
+      Routes.SHOP_ROUTE_NAME,
+      transitions: [
+        SailorTransition.fade_in,
+      ],
+      transitionDuration: Duration(milliseconds: 500),
+      transitionCurve: Curves.decelerate,
+      navigationType: NavigationType.push,
+      args: widget.args,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -93,6 +112,18 @@ class _SaunaHomePageState extends State<SaunaHomePage> {
                 ),
               ),
               onPressed: loginService.loginComplete() ? _slotsPressed : null,
+            ),
+            FlatButton(
+              color: Colors.black,
+              disabledColor: Colors.grey,
+              child: Text(
+                'shop',
+                style: TextStyle(
+                  color: Colors.white,
+                  fontSize: 20,
+                ),
+              ),
+              onPressed: loginService.loginComplete() ? _shopPressed : null,
             ),
           ],
         ),

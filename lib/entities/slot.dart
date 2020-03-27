@@ -1,5 +1,10 @@
+import 'dart:core';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:sauna/services/varausserver_service.dart';
+import 'package:sauna/services/login_service.dart';
+import 'package:provider/provider.dart';
+import 'reserve_slot_request.dart';
 
 class Slot {
   String _key;
@@ -10,6 +15,33 @@ class Slot {
   int day;
 
   Slot();
+
+  String key() => _key;
+
+  Future<void> _slotPressed(BuildContext context) async {
+    final varausServerService = Provider.of<VarausServerService>(context, listen: false);
+    final loginService = Provider.of<SaunaLoginService>(context, listen: false);
+    final tokenResult = await loginService.user.getIdToken(refresh: false);
+
+    ReserveSlotRequest request = ReserveSlotRequest(
+      slot: this,
+      timezoneOffset: 0,
+      weeksForward: 1,
+      userToken: tokenResult.token,
+    );
+
+    final result = await varausServerService.reserveSlot(request);
+    print('Result of reservation: ' + result.toString());
+
+  }
+
+  String toJson(){
+    return '''{
+      "key" : "$_key",
+      "start" : $start,
+      "day" : $day
+    }''';
+  }
 
   Slot.fromDynamic(String key, dynamic data) {
     _key = key;
@@ -42,38 +74,41 @@ class Slot {
 
   Widget present(BuildContext context) {
     return Card(
-      color: reserver.length > 0? Colors.blue : Colors.lightGreen,
+      color: reserver.length > 0 ? Colors.blue : Colors.lightGreen,
       margin: EdgeInsets.only(top: 10, bottom: 10),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: <Widget>[
-        Container(
-          //width: 150,
-          padding: EdgeInsets.all(10),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text(dayOfTheWeek(day)),
-              Text(timeStr(start) + ' - ' + timeStr(end)),
-            ],
-          ),
-        ),
-        Expanded(
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(reserver),
-            ],
-          ),
-        ),
-        Container(
-          padding: EdgeInsets.all(15),
-          child: Icon(
-            blocked ? Icons.block : Icons.check,
-            size: 30,
-          ),
-        ),
-      ]),
+            Container(
+              //width: 150,
+              padding: EdgeInsets.all(10),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  Text(dayOfTheWeek(day)),
+                  Text(timeStr(start) + ' - ' + timeStr(end)),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  Text(reserver),
+                ],
+              ),
+            ),
+            Container(
+              padding: EdgeInsets.all(15),
+              child: RaisedButton(
+                onPressed: () => _slotPressed(context),
+                child: Icon(
+                  blocked ? Icons.block : Icons.check,
+                  size: 30,
+                ),
+              ),
+            ),
+          ]),
     );
   }
 }
