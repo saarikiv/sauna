@@ -21,7 +21,9 @@ dependencies:
     sdk: flutter
 
   provider:
+  shared_preferences:
 
+  email_validator: ^1.0.0
   http: ^0.12.0+4
   sailor: ^0.6.0
   firebase_core: ^0.4.0+9

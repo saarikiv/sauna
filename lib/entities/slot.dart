@@ -18,6 +18,22 @@ class Slot {
 
   String key() => _key;
 
+  int defineWeeksForward(){
+    final time = DateTime.now();
+    final wDay = day==0? 7 : day;
+    if(time.weekday > wDay) return 1;
+    if(time.weekday < wDay) return 0;
+    //days match reservation is for today
+    int dTime = time.hour * 60 * 60 * 1000;
+    if(dTime > start) return 1;
+    return 0;
+  }
+
+  int defineTimezoneOffset(){
+    final time = DateTime.now();
+    return time.timeZoneOffset.inMilliseconds;
+  }
+
   Future<void> _slotPressed(BuildContext context) async {
     final varausServerService = Provider.of<VarausServerService>(context, listen: false);
     final loginService = Provider.of<SaunaLoginService>(context, listen: false);
@@ -25,8 +41,8 @@ class Slot {
 
     ReserveSlotRequest request = ReserveSlotRequest(
       slot: this,
-      timezoneOffset: 0,
-      weeksForward: 1,
+      timezoneOffset: defineTimezoneOffset(),
+      weeksForward: defineWeeksForward(),
       userToken: tokenResult.token,
     );
 

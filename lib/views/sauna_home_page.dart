@@ -99,7 +99,7 @@ class _SaunaHomePageState extends State<SaunaHomePage> {
                   fontSize: 20,
                 ),
               ),
-              onPressed: loginService.loginComplete()? null : _loginPressed,
+              onPressed: loginService.loginComplete()? _loginPressed : _loginPressed,
             ),
             FlatButton(
               color: Colors.black,

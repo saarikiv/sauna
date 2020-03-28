@@ -42,19 +42,33 @@ class _SaunaSlotPageState extends State<SaunaSlotPage> {
               child: FutureBuilder(
                   initialData: _slotService.slotList,
                   future: _slotService.slotsFromDb(),
-                  builder: (context, snapshot) {
-                    if (snapshot.hasData) {
-                      return new ListView.builder(
-                          physics: AlwaysScrollableScrollPhysics(),
-                          padding: EdgeInsets.all(10.0),
-                          scrollDirection: Axis.vertical,
-                          controller: ScrollController(
-                            initialScrollOffset: 20.0,
-                          ),
-                          shrinkWrap: true,
-                          itemCount: snapshot.data.length,
-                          itemBuilder: (BuildContext context, int index) {
-                              return snapshot.data[index].present(context);
+                  builder: (context, slotSnapshot) {
+                    if (slotSnapshot.hasData) {
+                      return StreamBuilder(
+                          stream: _slotService.slotReservations(),
+                          builder: (context, snap) {
+                            if (snap.hasData &&
+                                !snap.hasError &&
+                                snap.data != null) {
+                              _slotService
+                                  .processReservationStatus(snap.data.snapshot);
+                              print('perskuta rallaa...');
+                              return new ListView.builder(
+                                  physics: AlwaysScrollableScrollPhysics(),
+                                  padding: EdgeInsets.all(10.0),
+                                  scrollDirection: Axis.vertical,
+                                  controller: ScrollController(
+                                    initialScrollOffset: 20.0,
+                                  ),
+                                  shrinkWrap: true,
+                                  itemCount: slotSnapshot.data.length,
+                                  itemBuilder:
+                                      (BuildContext context, int index) {
+                                    return slotSnapshot.data[index]
+                                        .present(context);
+                                  });
+                            }
+                            return CircularProgressIndicator();
                           });
                     }
                     return CircularProgressIndicator();
